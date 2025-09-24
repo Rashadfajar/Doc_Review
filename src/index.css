@@ -1,2 +1,41 @@
 @import "tailwindcss";
 
+/* === PDF.js textLayer hard reset (agar sejajar & selectable) === */
+.pdfViewer .textLayer {
+  position: absolute !important;   /* harus absolut di atas canvas */
+  inset: 0 !important;
+  white-space: pre !important;     /* jangan dibungkus/diubah line-height */
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  transform-origin: 0 0 !important;
+  z-index: 2 !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  pointer-events: auto !important; /* menerima drag/select */
+}
+
+/* Reset setiap span pada textLayer supaya tidak ikut style global/prose */
+.pdfViewer .textLayer > span {
+  position: absolute !important;
+  transform-origin: 0 0 !important;
+  white-space: pre !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  font-kerning: none !important;
+  text-rendering: optimizeSpeed !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Tampilan highlight saat diseleksi */
+.pdfViewer .textLayer ::selection { background: rgba(180,213,255,.99); color: #000; }
+
+/* Semua overlay UI yang melayang di atas PDF jangan blok pointer */
+.pdf-floating, .pdf-floating * { pointer-events: none !important; }
+
+/* Jaga layer urutan */
+.pdfViewer .page { position: relative; }
+.pdfViewer .canvasWrapper { z-index: 1; }
+.pdfViewer .textLayer { z-index: 2 !important; }

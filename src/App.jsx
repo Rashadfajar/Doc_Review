@@ -470,7 +470,7 @@ async function flattenOutlineRecursive(pdf, items, level = 1) {
 function SmallSectionToggle({ onOpen }) {
   return (
     <button
-      className="fixed z-40 top-20 left-4 px-2.5 py-1.5 text-xs rounded-lg border bg-white/90 backdrop-blur shadow hover:bg-white pointer-events-auto"
+      className="pdf-floating fixed z-40 top-20 left-4 px-2.5 py-1.5 text-xs rounded-lg border bg-white/90 backdrop-blur shadow hover:bg-white pointer-events-auto"
       onClick={onOpen}
       title="Buka Sections"
       aria-label="Buka Sections"
@@ -555,7 +555,7 @@ function MinimalCommentDock({ onExpand, comments, pageLabel }) {
   const last = safeComments.slice(-1);
 
   return (
-    <div className="absolute bottom-4 right-4 z-40">
+    <div className="pdf-floating absolute bottom-4 right-4 z-40">
       <div className="bg-white/70 backdrop-blur-md border shadow-xl rounded-xl w-40 max-w-[80vw]">
         <div className="px-3 py-2 border-b flex items-center justify-between">
           <div className="text-sm font-medium">Komentar</div>
@@ -769,6 +769,7 @@ function PdfWorkspace({ user, file, onBack }) {
           eventBus,
           linkService,
           textLayerMode: 2,
+          // annotationMode: 2,
         });
         linkService.setViewer(viewer);
         viewerRef.current = viewer;
@@ -1114,14 +1115,14 @@ function PdfWorkspace({ user, file, onBack }) {
             >
               <div className="pdfViewer"></div>
               {loading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-lg font-semibold">
+                <div className="pdf-floating absolute inset-0 flex items-center justify-center bg-black/30 text-white text-lg font-semibold">
                   Loading PDF...
                 </div>
               )}
             </div>
             {!isFullscreen && (
-              <div className="pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 z-30">
-                <div className="pointer-events-auto rounded-full border bg-white/90 backdrop-blur px-3 py-1 text-xs shadow">
+              <div className="pdf-floating pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 z-30">
+                <div className="rounded-full border bg-white/90 backdrop-blur px-3 py-1 text-xs shadow">
                   <b>Page</b>:<b>{currentPage}</b>
                 </div>
               </div>

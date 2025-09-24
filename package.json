@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "postbuild": "cp dist/index.html dist/404.html || copy dist\\index.html dist\\404.html",
+    "predeploy": "npm run build && npm run postbuild",
+    "deploy": "gh-pages -d dist -b gh-pages"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
